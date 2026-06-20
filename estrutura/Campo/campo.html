@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BOMB FIELD</title>
+        <link rel="stylesheet" href="style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+
+    <body>
+    <div id="level-up">
+    <h1 id="level-text"></h1>
+</div>
+    <button type="button" id="botao" onclick="window.location='../index.html'">
+        Voltar
+    </button>        
+    <h1>MINAS: <span id="mines-count">0   </span>     
+            <br>
+            <button id="flag-button"> 🚩</button></h1>
+        <div id="board"></div>
+        <div id="game-over">
+        <h1>GAME OVER</h1>
+            <button id="restart-btn">REINICIAR</button>
+        </div>
+        <script src="campo.js"></script>
+
+    </body>
+</html>

@@ -1,0 +1,362 @@
+body{
+    margin:0;
+    width:100vw;
+    height:100vh;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    overflow:hidden;
+
+    font-family:'Segoe UI', sans-serif;
+    color:#fff;
+
+    background:
+    radial-gradient(circle at top,
+        #3a0008 0%,
+        #120005 35%,
+        #000 80%
+    );
+}
+
+/* brilho ambiente */
+body::before{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background:
+    radial-gradient(circle at 20% 20%, rgba(120,0,30,0.25), transparent 40%),
+    radial-gradient(circle at 80% 60%, rgba(246, 70, 111, 0.181), transparent 50%);
+
+    pointer-events:none;
+}
+
+h1{
+    margin:0 0 20px 0;
+    font-size:3rem;
+
+    text-align:center;
+    letter-spacing:3px;
+
+    color:#ffe6ea;
+
+    text-shadow:
+    0 0 8px #ff2a55,
+    0 0 20px #8b0015,
+    0 0 35px #3a0008;
+}
+
+/* TABULEIRO */
+#board{
+    width:400px;
+    height:316px;
+
+    display:flex;
+    flex-wrap:wrap;
+
+    padding:10px;
+    border-radius:10px;
+
+    background:
+    linear-gradient(145deg,
+        rgba(40,0,10,0.95),
+        rgba(8, 10, 0, 0.98)
+    );
+
+    box-shadow:
+    0 0 25px rgba(255,0,60,0.25),
+    inset 0 0 25px rgba(255,0,60,0.15);
+
+    border:1px solid rgba(255,80,120,0.2);
+}
+
+/* CASAS */
+#board div{
+    width:48px;
+    height:48px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:26px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    background:
+    linear-gradient(145deg,
+        #1a0a0d,
+        #0b0507
+    );
+
+    border:1px solid rgba(255,70,110,0.25);
+
+    animation:borderBlink 6s infinite;
+
+    transition:.2s ease;
+}
+
+#board div:hover{
+    transform:scale(1.05);
+
+    box-shadow:
+    0 0 10px rgba(255,0,60,0.4);
+}
+#board div{
+    font-weight:900;
+    text-shadow:0 0 4px rgba(0,0,0,0.8);
+}
+
+/* clicado */
+.tile-clicked{
+    background:
+    linear-gradient(145deg,
+        #f8f8f8,
+        #5a5355
+    ) !important;
+
+}
+
+/* bandeira */
+#flag-button{
+    width:65px;
+    height:65px;
+
+    border:none;
+    border-radius:50%;
+
+    font-size:28px;
+
+    cursor:pointer;
+
+    background:
+    radial-gradient(circle,
+        #2a0008,
+        #0b0003
+    );
+
+    color:#fff;
+
+    box-shadow:
+    0 0 15px rgba(255,0,60,0.4),
+    inset 0 0 10px rgba(255,0,60,0.2);
+
+    transition:.3s;
+}
+
+#flag-button:hover{
+    transform:scale(1.1);
+    box-shadow:
+    0 0 25px rgba(255,0,60,0.6);
+}
+
+/* voltar */
+#botao{
+    position:absolute;
+    top:20px;
+    left:20px;
+    font-size: 16px;
+
+    width:100px;
+    height:37px;
+
+    border:none;
+    border-radius:12px;
+
+    color:#fff;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    background:
+    linear-gradient(135deg,
+        #2a0008,
+        #630311,
+        #942037
+    );
+
+    box-shadow:
+    0 0 15px rgba(255,0,60,0.35);
+
+    transition:.3s;
+}
+
+#botao:hover{
+    transform:scale(1.05);
+    box-shadow:
+    0 0 25px rgba(255,0,60,0.6);
+}
+.explosion {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+
+    background: radial-gradient(circle, #a71a1a, #ff8a00, transparent);
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    animation: explode 0.6s ease-out forwards;
+    z-index: 9999;
+}
+
+@keyframes explode {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+        filter: blur(0px);
+    }
+    100% {
+        transform: scale(12);
+        opacity: 0;
+        filter: blur(4px);
+    }
+}
+
+/* números */
+.x1{ color:#c11ab0; }
+.x2{ color:#b3a810; }
+.x3{ color:#335bf8; }
+
+/* borda RGB mantendo seu estilo */
+@keyframes borderBlink {
+    0% { border-color: #ff2a55; }
+    20% { border-color: #ffb300; }
+    40% { border-color: #00ff88; }
+    60% { border-color: #00c2ff; }
+    80% { border-color: #b400ff; }
+    100% { border-color: #ff2a55; }
+}
+
+.shake {
+    animation: shakeScreen 0.4s;
+}
+
+@keyframes shakeScreen {
+    0% { transform: translate(0, 0); }
+    10% { transform: translate(-5px, 3px); }
+    20% { transform: translate(5px, -3px); }
+    30% { transform: translate(-5px, -2px); }
+    40% { transform: translate(5px, 2px); }
+    50% { transform: translate(-3px, -1px); }
+    60% { transform: translate(3px, 1px); }
+    70% { transform: translate(-2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    90% { transform: translate(-1px, 1px); }
+    100% { transform: translate(0, 0); }
+}
+
+#game-over {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0, 0, 0, 0.85);
+
+    color: #fff;
+
+    z-index: 99999;
+
+    text-align: center;
+}
+
+#game-over h1 {
+    font-size: 4rem;
+    color: #ff2a2a;
+
+    text-shadow:
+        0 0 10px #ff2a2a,
+        0 0 30px #8b0015;
+}
+
+#restart-btn {
+    margin-top: 20px;
+
+    padding: 15px 30px;
+
+    font-size: 1.2rem;
+    font-weight: bold;
+
+    border: none;
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    color: white;
+
+    background: linear-gradient(135deg, #5c000e, #83182e);
+
+    box-shadow: 0 0 20px rgba(255, 0, 60, 0.4);
+
+    transition: 0.3s;
+}
+
+#restart-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(255, 0, 60, 0.7);
+}
+
+#flag-button.active {
+    background: radial-gradient(circle, #fac8c8, #8b0015);
+    box-shadow:
+        0 0 15px #ff2a2a,
+        0 0 30px #8b0015,
+        inset 0 0 10px rgba(255,255,255,0.2);
+
+    transform: scale(1.1);
+    border: 2px solid #ff2a2a;
+}
+
+@media (max-width: 768px){
+
+    body{
+        padding:10px;
+    }
+
+    h1{
+        font-size:2rem;
+        text-align:center;
+    }
+
+    #board{
+        width:90vw;
+        height:90vw;
+        max-width:360px;
+        max-height:360px;
+
+        padding:6px;
+    }
+
+    #board div{
+        width:calc(100% / 8);
+        height:calc(100% / 8);
+
+        font-size:18px;
+    }
+
+    #flag-button{
+        width:55px;
+        height:55px;
+        font-size:22px;
+    }
+
+    #botao{
+        width:120px;
+        height:40px;
+        font-size:14px;
+        top:10px;
+        right:10px;
+    }
+}
